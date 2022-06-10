@@ -1,0 +1,48 @@
+name: phytool
+base: core20
+version: 'v2'
+summary: Linux MDIO register access
+description: |
+  Please see https://github.com/wkz/phytool for the upstream source code and
+  documentation.
+
+  **NOTE:** this is an unofficial snap not published by the phytool authors!
+website: https://github.com/IsaacJT/phytool-snap
+grade: stable
+confinement: strict
+
+parts:
+  phytool:
+    source: https://github.com/wkz/phytool.git
+    source-tag: v2
+    source-depth: 1
+    source-type: git
+    plugin: make
+    make-parameters:
+        - "CC=${SNAPCRAFT_ARCH_TRIPLET}-gcc"
+    override-build: |
+      mkdir -p ${SNAPCRAFT_PART_INSTALL}/usr/local/bin
+      snapcraftctl build
+    build-packages:
+      - make
+      - to amd64:
+        - gcc
+      - else:
+        - gcc-${SNAPCRAFT_ARCH_TRIPLET}
+  wrapper:
+    source: scripts
+    plugin: dump
+    organize:
+      wrapper: usr/local/bin/wrapper
+
+apps:
+  phytool:
+    command: usr/local/bin/wrapper $SNAP/usr/local/bin/phytool
+    plugs:
+      - network
+      - netlink-connector
+  mv6tool:
+    command: usr/local/bin/wrapper $SNAP/usr/local/bin/mv6tool
+    plugs:
+      - network
+      - netlink-connector
