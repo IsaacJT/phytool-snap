@@ -3,6 +3,6 @@
 if snapctl is-connected netlink-connector; then
 	exec ${@}
 else
-	echo "Please connect the `netlink-connector` interface!"
+	echo "Please connect the 'netlink-connector' interface!"
 	echo "  $ snap connect phytool:netlink-connector"
 fi
