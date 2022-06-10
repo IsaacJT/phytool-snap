@@ -25,7 +25,7 @@ parts:
       snapcraftctl build
     build-packages:
       - make
-      - to amd64:
+      - to ${SNAPCRAFT_TARGET_ARCH}:
         - gcc
       - else:
         - gcc-${SNAPCRAFT_ARCH_TRIPLET}
