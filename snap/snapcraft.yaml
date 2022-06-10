@@ -1,7 +1,7 @@
 name: phytool
 base: core20
 version: 'v2'
-summary: Linux MDIO register access
+summary: Snapped version of the phytool command for MDIO device access
 description: |
   Please see https://github.com/wkz/phytool for the upstream source code and
   documentation.
